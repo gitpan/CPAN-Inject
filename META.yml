@@ -1,0 +1,25 @@
+abstract: Base class for injecting distributions into CPAN sources
+author: The C<author> accessor returns the CPAN id for the default author which
+build_requires: 
+  File::Remove: 0.22
+  Test::More: 0.42
+distribution_type: module
+generated_by: Module::Install version 0.64
+license: perl
+name: CPAN-Inject
+no_index: 
+  directory: 
+    - inc
+    - t
+requires: 
+  CPAN: 1.87
+  CPAN::Checksums: 1.05
+  File::Basename: 2.6
+  File::Copy: 2.02
+  File::Path: 1.00
+  File::Spec: 0.80
+  File::chmod: 0.30
+  File::stat: 1.00
+  Params::Util: 0.10
+  perl: 5.005
+version: 0.01
