@@ -100,7 +100,8 @@ METHODS
     The specific location the tarball is copied to will be in the root
     directory for the author provided to the constructor.
 
-    Returns true, or throws an exception on error.
+    Returns the install_path value as a convenience, or throws an exception
+    on error.
 
   author_subpath
       # $path = 'authors/id/L/LO/LOCAL'
