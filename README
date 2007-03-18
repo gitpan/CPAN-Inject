@@ -13,7 +13,7 @@ SYNOPSIS
   
       # What would have have to use when installing
       # $path = 'LOCAL/Perl-Tarball-1.02.tar.gz';
-      my $path = $cpan->cpan_path( 'some/random/Perl-Tarball-1.02.tar.gz' );
+      my $path = $cpan->install_path( 'some/random/Perl-Tarball-1.02.tar.gz' );
 
 DESCRIPTION
     Following the release of CPAN::Mini, the CPAN::Mini::Inject module was
@@ -92,7 +92,7 @@ METHODS
 
   add
       # Add a file to the constructor/default author
-      $cpan->add( 'any/arbitrary/Perl-Tarball-1.01.tar.gz' );
+      $cpan->add( file => 'any/arbitrary/Perl-Tarball-1.01.tar.gz' );
 
     The "add" method takes a Perl distribution tarball from an arbitrary
     path, and adds it to the sources path.
@@ -102,6 +102,15 @@ METHODS
 
     Returns the install_path value as a convenience, or throws an exception
     on error.
+
+  remove
+      # Remove a distribution from the repository
+      $cpan->remove( dist => 'LOCAL/Perl-Tarball-1.01.tar.gz' );
+
+    The "remove" method takes a distribution path and removes it from the
+    sources path. The file is also removed.
+
+    Does not return anything useful and throws an exception on error.
 
   author_subpath
       # $path = 'authors/id/L/LO/LOCAL'
@@ -141,8 +150,8 @@ METHODS
       $path = $cpan->install_path( 'Perl-Tarball-1.01.tar.gz' );
       $path = $cpan->install_path( '/some/random/place/Perl-Tarball-1.02.tar.gz' );
 
-    The "cpan_path" method returns the path for the distribution as the CPAN
-    shell understands it.
+    The "install_path" method returns the path for the distribution as the
+    CPAN shell understands it.
 
     Using this path, the CPAN shell can expand it to locate the
     distribution, and then can install it.
@@ -152,7 +161,7 @@ METHODS
 SUPPORT
     This module is stored in an Open Repository at the following address.
 
-    <http://svn.phase-n.com/svn/cpan/trunk/Module-Inject>
+    <http://svn.phase-n.com/svn/cpan/trunk/CPAN-Inject>
 
     Write access to the repository is made available automatically to any
     published CPAN author, and to most other volunteers on request.
@@ -170,7 +179,7 @@ SUPPORT
     then regular bug reports are still accepted and appreciated via the CPAN
     bug tracker.
 
-    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Module-Inject>
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CPAN-Inject>
 
     For other issues, for commercial enhancement or support, or to have your
     write access enabled for the repository, contact the author at the email
@@ -190,4 +199,21 @@ COPYRIGHT
 
     The full text of the license can be found in the LICENSE file included
     with this module.
+
+    ???
+
+    # PBP .perltidyrc file
+
+    -l=78 # Max line width is 78 cols -i=4 # Indent level is 4 cols -ci=4 #
+    Continuation indent is 4 cols -st # Output to STDOUT -se # Errors to
+    STDERR -vt=2 # Maximal vertical tightness -cti=0 # No extra indentation
+    for closing brackets -pt=1 # Medium parenthesis tightness -bt=1 # Medium
+    brace tightness -sbt=1 # Medium square bracket tightness -bbt=1 # Medium
+    block brace tightness -nsfs # No space before semicolons -nolq # Don't
+    outdent long quoted strings -wbb="% + - * / x != == >= <= =~ !~ < > | &
+    >= < = **= += *= &= <<= &&= -= /= |= >>= ||= .= %= ^= x=" # Break before
+    all operators -fs
+
+    ;;; Local Variables: *** ;;; mode:cperl *** ;;; cperl-indent-level: 4
+    *** ;;; End: *** =cut
 
