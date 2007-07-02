@@ -58,13 +58,12 @@ use File::Spec      ();
 use File::Path      ();
 use File::Copy      ();
 use File::Basename  ();
-use CPAN            ();
 use CPAN::Checksums ();
 
 use vars qw{$VERSION $CHECK_OWNER};
 
 BEGIN {
-    $VERSION = '0.06';
+    $VERSION = '0.07';
 
     # Attempt to determine whether or not we are capable
     # of finding the owner of a directory.
@@ -90,6 +89,10 @@ BEGIN {
     # And boolify the value, just to be a little safer
     $CHECK_OWNER = !!$CHECK_OWNER;
 }
+
+
+
+
 
 #####################################################################
 # Constructor and Accessors
@@ -131,7 +134,7 @@ Returns a C<CPAN::Inject> object, or throws an exception on error.
 
 sub new {
     my $class = shift;
-    my $self = bless {@_}, $class;
+    my $self  = bless {@_}, $class;
 
     # Check where we are going to write to
     my $sources = $self->sources;
@@ -174,15 +177,32 @@ error.
 sub from_cpan_config {
     my $class = shift;
 
-    # Load the CPAN configuration
-    CPAN::HandleConfig->load;
+    # Load the CPAN module
+    require CPAN;
+
+    # Support for different mechanisms depending on the version
+    # of CPAN that is in use.
+    if ( defined $CPAN::HandleConfig::VERSION ) {
+        CPAN::HandleConfig->load;
+    } else {
+        CPAN::Config->load;
+    }
 
     # Get the sources directory
-    my $sources = $CPAN::Config->{keep_source_where}
-        or Carp::croak("Failed to find sources directory in CPAN::Config");
+    my $sources = undef;
+    if ( defined $CPAN::Config->{keep_source_where} ) {
+        $sources = $CPAN::Config->{keep_source_where};
+    } elsif ( defined $CPAN::Config->{cpan_home} ) {
+        $sources = File::Spec->catdir( $CPAN::Config->{cpan_home}, 'sources' );
+    } else {
+        Carp::croak("Failed to find sources directory in CPAN::Config");
+    }
 
     # Hand off to the main constructor
-    $class->new( sources => $sources, @_ );
+    return $class->new(
+        sources => $sources,
+        @_,
+        );
 }
 
 =pod
@@ -210,6 +230,10 @@ C<new> constructor.
 sub author {
     $_[0]->{author};
 }
+
+
+
+
 
 #####################################################################
 # Main methods
@@ -290,13 +314,11 @@ Does not return anything useful and throws an exception on error.
 =cut
 
 sub remove {
-    my $self   = shift @_;
+    my $self   = shift;
     my %params = @_;
 
-    my $from_dist = $params{dist};
-
     # Get the file name
-    my $name = File::Basename::fileparse($from_dist)
+    my $name = File::Basename::fileparse($params{dist})
         or die "Failed to get filename";
 
     my $file_path = $self->file_path($name);
@@ -312,7 +334,7 @@ sub remove {
         Carp::croak("Failed to update CHECKSUMS after removal: $e");
     }
 
-    return;
+    return 1;
 }
 
 =pod
@@ -403,6 +425,10 @@ sub install_path {
         or Carp::croak("Failed to get filename");
     join( '/', $self->author, $file );
 }
+
+
+
+
 
 #####################################################################
 # Support Functions
