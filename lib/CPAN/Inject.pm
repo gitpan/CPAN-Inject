@@ -15,7 +15,7 @@ CPAN::Inject - Base class for injecting distributions into CPAN sources
       );
   
   # Add a file to the user
-  $cpan->add( 'some/random/Perl-Tarball-1.02.tar.gz' );
+  $cpan->add( file => 'some/random/Perl-Tarball-1.02.tar.gz' );
   
   # What would have have to use when installing
   # $path = 'LOCAL/Perl-Tarball-1.02.tar.gz';
@@ -51,7 +51,7 @@ and sub-classable, so that it can be reused in other situations.
 
 use 5.005;
 use strict;
-use Params::Util '_STRING';
+use Params::Util    '_STRING';
 use File::stat      ();
 use File::chmod     ();
 use File::Spec      ();
@@ -63,7 +63,7 @@ use CPAN::Checksums ();
 use vars qw{$VERSION $CHECK_OWNER};
 
 BEGIN {
-    $VERSION = '0.07';
+    $VERSION = '0.08';
 
     # Attempt to determine whether or not we are capable
     # of finding the owner of a directory.
@@ -445,7 +445,7 @@ sub _AUTHOR {
 
 This module is stored in an Open Repository at the following address.
 
-L<http://svn.phase-n.com/svn/cpan/trunk/CPAN-Inject>
+L<http://svn.ali.as/cpan/trunk/CPAN-Inject>
 
 Write access to the repository is made available automatically to any
 published CPAN author, and to most other volunteers on request.

@@ -9,7 +9,7 @@ SYNOPSIS
           );
   
       # Add a file to the user
-      $cpan->add( 'some/random/Perl-Tarball-1.02.tar.gz' );
+      $cpan->add( file => 'some/random/Perl-Tarball-1.02.tar.gz' );
   
       # What would have have to use when installing
       # $path = 'LOCAL/Perl-Tarball-1.02.tar.gz';
@@ -161,7 +161,7 @@ METHODS
 SUPPORT
     This module is stored in an Open Repository at the following address.
 
-    <http://svn.phase-n.com/svn/cpan/trunk/CPAN-Inject>
+    <http://svn.ali.as/cpan/trunk/CPAN-Inject>
 
     Write access to the repository is made available automatically to any
     published CPAN author, and to most other volunteers on request.
