@@ -7,11 +7,11 @@ SYNOPSIS
           sources => '/root/.cpan/sources',  # Required field
           author  => 'LOCAL',                # The default
           );
-  
-      # Add a file to the user
+      
+  # Add a file to the user
       $cpan->add( file => 'some/random/Perl-Tarball-1.02.tar.gz' );
-  
-      # What would have have to use when installing
+      
+  # What would have have to use when installing
       # $path = 'LOCAL/Perl-Tarball-1.02.tar.gz';
       my $path = $cpan->install_path( 'some/random/Perl-Tarball-1.02.tar.gz' );
 
@@ -46,8 +46,8 @@ METHODS
       $cpan = CPAN::Inject->new(
           sources => '/root/.cpan/sources',
           );
-  
-      # Create the injector for a specific author
+      
+  # Create the injector for a specific author
       $cpan = CPAN::Inject->new(
           sources => '/root/.cpan/sources',
           author  => 'ADAMK',
@@ -192,7 +192,7 @@ SEE ALSO
     CPAN::Mini::Inject
 
 COPYRIGHT
-    Copyright 2006 - 2007 Adam Kennedy.
+    Copyright 2006 - 2010 Adam Kennedy.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
