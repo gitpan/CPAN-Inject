@@ -17,6 +17,7 @@ README
 script/cpaninject
 t/01_compile.t
 t/02_main.t
+t/data/Config-Tiny-2.09.tar.gz
 xt/meta.t
 xt/pmv.t
 xt/pod.t

@@ -41,13 +41,14 @@ Perl module that might have a dozen or more CPAN dependencies.
 
 package cpaninject;
 
+use 5.006;
 use strict;
-use Params::Util '_STRING';
+use Params::Util ();
 use CPAN::Inject;
 
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = '1.12';
+	$VERSION = '1.13';
 }
 
 
@@ -62,7 +63,7 @@ unless ( @ARGV ) {
 }
 
 # Get the file name
-my $file = _STRING(shift @ARGV);
+my $file = Params::Util::_STRING(shift @ARGV);
 unless ( $file ) {
 	error("Did not provide a file name");
 }
@@ -126,7 +127,7 @@ L<CPAN::Mini::Inject>
 
 =head1 COPYRIGHT
 
-Copyright 2006 - 2010 Adam Kennedy.
+Copyright 2006 - 2011 Adam Kennedy.
 
 This program is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.
