@@ -1,5 +1,8 @@
 Revision history for Perl extension CPAN-Inject
 
+1.14 Wed 12 Sep 2012
+	- Allow two-letter cpan ids (PSHANGOV)
+
 1.13 Wed 5 Jan 2011
 	- Bumped minimum version of Perl to 5.006 (ADAMK)
 	- Test pass with a non-existant ~/.cpan (BOGDAN)
